@@ -1,0 +1,55 @@
+﻿@page "/employeeoverview"
+
+<h3>EmployeeOverview</h3>
+@if (Employees != null)
+{
+<table class="table">
+    <tr>
+        <th> Employee Id </th>
+        <th> First Name </th>
+        <th> Last Name </th>
+        <th></th>
+    </tr>
+    @foreach (var emp in Employees)
+    {
+<tr>
+    <td>@emp.EmployeeId</td>
+    <td>@emp.FirstName</td>
+    <td>@emp.LastName</td>
+    <td>
+        <a href="@($"employeedetails/{emp.EmployeeId}")" class="btn btn-primary"> Details </a>
+    </td>
+    <td>
+        <a href="@($"employeeedit/{emp.EmployeeId}")" class="btn btn-primary"> Edit </a>
+    </td>
+</tr>
+    }
+
+</table>
+}
+else
+{
+    <div> Wait until loading finish......... </div>
+}
+
+@code {
+    List<Employee> Employees;
+
+    [Inject]
+    public HttpClient httpClient { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Employees = await httpClient.GetFromJsonAsync<List<Employee>>("https://localhost:7051/api/employee");
+    }
+
+    //IEnumerable<Employee> Employees;
+
+    //[Inject]
+    //public IEmployeeDataService EmployeeDataService { get; set; }
+
+    //protected async override Task OnInitializedAsync()
+    //{
+    //    Employees = await EmployeeDataService.GetAllEmployees();
+    //}
+}
