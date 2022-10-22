@@ -10,12 +10,13 @@ namespace EmployeeAuthCrud.UI.Pages
         public int EmployeeId { get; set; }
 
         Employee Employee = new Employee();
+ 
 
         [Inject]
         public IEmployeeDataService EmployeeDataService { get; set; }
+         
 
-        //List<Employee> Employees;
-        //List<Country> Countries;
+
 
         protected bool Saved;
 
@@ -26,13 +27,16 @@ namespace EmployeeAuthCrud.UI.Pages
         protected async override Task OnInitializedAsync()
         {
             Employee = await EmployeeDataService.GetEmployeeDetails(EmployeeId);
+           
+
 
             if (Employee == null) //new employee is being created
             {
-                //add some defaults
-                Employee = new Employee { CountryId = 1, BirthDate = DateTime.Now, JoinedDate = DateTime.Now };
+
+                Employee = new Employee();
+
             }
-           
+
         }
 
         protected async void HandleValidSubmit()

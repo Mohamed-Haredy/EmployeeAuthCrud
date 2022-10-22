@@ -1,6 +1,6 @@
 ﻿@page "/employeeedit"
 @page "/employeeedit/{EmployeeId:int}"
-
+@using EmployeeAuthCrud.Domain.Entities;
 
 @if (!Saved)
 {
@@ -33,18 +33,18 @@
         <div class="form-group row">
             <label for="email" class="col-form-label">Email: </label>
             <InputText id="email" class="form-control" @bind-Value="@Employee.Email" placeholder="Enter email"></InputText>
-            @*<ValidationMessage For="@(() => Employee.Email)" />*@
+          
         </div>
 
-        <div class="form-group row">
+   @*     <div class="form-group row">
             <label for="country" class="col-form-label">Country: </label>
             <InputSelect id="country" class="form-control" @bind-Value="@Employee.CountryId">
-                @*@foreach (var country in Countries)
+                @foreach (var country in Countries)
                     {
                     <option value="@country.CountryId">@country.Name</option>
-                    }*@
+                    }
             </InputSelect>
-        </div>
+        </div>*@
 
         <div class="form-group row">
             <label for="phonenumber" class="col-form-label">Phone number: </label>
@@ -52,9 +52,6 @@
         </div>
 
       
-
-     
-
         <div class="form-group row">
             <label for="joineddate" class="col-form-label">Joined on: </label>
             <InputDate id="joineddate" class="form-control" @bind-Value="@Employee.JoinedDate" placeholder="Enter date joined"></InputDate>

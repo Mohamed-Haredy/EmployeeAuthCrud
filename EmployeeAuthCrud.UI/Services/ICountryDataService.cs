@@ -7,6 +7,6 @@ namespace EmployeeAuthCrud.UI.Services
     {
 
         Task<IEnumerable<Country>> GetAllCountries();
-        Task<Country> GetCountryDetails(int employeeId);
+        Task<Country> GetCountryDetails(int CountryId);
     }
 }
