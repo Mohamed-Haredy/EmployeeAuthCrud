@@ -17,6 +17,7 @@
     <td>@emp.FirstName</td>
     <td>@emp.LastName</td>
     <td>
+        
         <a href="@($"employeedetails/{emp.EmployeeId}")" class="btn btn-primary"> Details </a>
     </td>
     <td>
@@ -33,23 +34,23 @@ else
 }
 
 @code {
-    List<Employee> Employees;
-
-    [Inject]
-    public HttpClient httpClient { get; set; }
-
-    protected override async Task OnInitializedAsync()
-    {
-        Employees = await httpClient.GetFromJsonAsync<List<Employee>>("https://localhost:7051/api/employee");
-    }
-
-    //IEnumerable<Employee> Employees;
+    //List<Employee> Employees;
 
     //[Inject]
-    //public IEmployeeDataService EmployeeDataService { get; set; }
+    //public HttpClient httpClient { get; set; }
 
-    //protected async override Task OnInitializedAsync()
+    //protected override async Task OnInitializedAsync()
     //{
-    //    Employees = await EmployeeDataService.GetAllEmployees();
+    //    Employees = await httpClient.GetFromJsonAsync<List<Employee>>("https://localhost:7051/api/employee");
     //}
+
+    IEnumerable<Employee> Employees;
+
+    [Inject]
+    public IEmployeeDataService EmployeeDataService { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        Employees = await EmployeeDataService.GetAllEmployees();
+    }
 }

@@ -1,0 +1,53 @@
+﻿@page "/employeedetails/{EmployeeId:int}"
+
+@if (curEmp != null)
+{
+<h3 class="card-title">EmployeeDetails of @curEmp.FirstName @curEmp.LastName </h3>
+
+<div class="form-group">
+    <label class="col-form-label"> Employee Id </label>
+    <label class="form-control">@curEmp.EmployeeId</label>
+</div>
+
+<div class="form-group">
+    <label class="col-form-label"> First Name </label>
+    <label class="form-control">@curEmp.FirstName</label>
+</div>
+
+<div class="form-group row">
+    <label class="col-form-label"> Last Name </label>
+    <label class="form-control"> @curEmp.LastName </label>
+</div>
+
+<div class="form-group row">
+    <label class="col-form-label"> Birthdate </label>
+    <label class="form-control"> @curEmp.BirthDate </label>
+</div>
+
+<div class="form-group row">
+    <label class="col-form-label"> Email </label>
+    <label class="form-control"> @curEmp.Email </label>
+</div>
+
+<div class="form-group row">
+    <label class="col-form-label"> Phone Number </label>
+    <label class="form-control"> @curEmp.PhoneNumber </label>
+</div>
+
+ 
+
+<div class="form-group row">
+    <label class="col-form-label"> joinedCompany Date </label>
+    <label class="form-control"> @curEmp.JoinedDate?.ToShortDateString() </label>
+</div>
+
+<div class="form-group row">
+    <label class="col-form-label"> LeftCompany Date </label>
+    <label class="form-control"> @curEmp.ExitDate?.ToShortDateString() </label>
+</div>
+
+}
+else
+{
+    <div> Hold On.....</div>
+}

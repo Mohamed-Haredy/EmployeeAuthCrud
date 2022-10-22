@@ -2,6 +2,9 @@
 using EmployeeAuthCrud.Domain.Entities;
 using System.Text;
 using System.Text.Json;
+ 
+using System.Net.Http;
+ 
 
 namespace EmployeeAuthCrud.UI.Services
 {
@@ -13,20 +16,18 @@ namespace EmployeeAuthCrud.UI.Services
             this.httpClient = httpClient;
         }
 
-        public async Task<IEnumerable<Employee>> GetAllEmployees()
+        async Task<IEnumerable<Employee>> IEmployeeDataService.GetAllEmployees()
         {
+#pragma warning disable CS8603 // Possible null reference return.
             return await JsonSerializer.DeserializeAsync<IEnumerable<Employee>>
                 (await httpClient.GetStreamAsync("/api/Employee"), new JsonSerializerOptions()
-                { PropertyNameCaseInsensitive = true});
-        }
-
-        public async Task<Employee> GetEmployeeDetails(int employeeId)
-        {
-            return await JsonSerializer.DeserializeAsync<Employee>
-                (await httpClient.GetStreamAsync("/api/Employee/"+employeeId), new JsonSerializerOptions()
                 { PropertyNameCaseInsensitive = true });
+#pragma warning restore CS8603 // Possible null reference return.
         }
 
+        public async Task<Employee> GetEmployeeDetails(int employeeId) => await JsonSerializer.DeserializeAsync<Employee>
+(await httpClient.GetStreamAsync("/api/Employee/" + employeeId), new JsonSerializerOptions()
+{ PropertyNameCaseInsensitive = true });
 
         public async Task AddEmployee(Employee employee)
         {
@@ -50,15 +51,7 @@ namespace EmployeeAuthCrud.UI.Services
             await httpClient.PutAsync("/api/Employee/"+employee.EmployeeId, empObjSer);
         }
 
-        Task<IEnumerable<Employee>> IEmployeeDataService.GetAllEmployees()
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<Employee> IEmployeeDataService.GetEmployeeDetails(int employeeId)
-        {
-            throw new NotImplementedException();
-        }
+     
 
       
     }
