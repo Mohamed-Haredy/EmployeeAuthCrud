@@ -46,7 +46,7 @@ namespace EmployeeAuthCrud.UI.Pages
             if (Employee.EmployeeId == 0) //new
             {
                 await EmployeeDataService.AddEmployee(Employee);
-
+                
                 StatusClass = "alert-success";
                 Message = "New employee added successfully.";
                 Saved = true;
